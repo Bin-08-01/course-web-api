@@ -1,5 +1,5 @@
 # course-web-api
 Run:
-***npm run dev***
+```npm run dev```
 hoặc 
-***npm start***
+```npm start```
