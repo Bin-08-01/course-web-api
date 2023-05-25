@@ -1,6 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const CourseSchema = Schema({
+    subjectID: {
+        type: Schema.Types.ObjectId,
+        ref: "Subjects",
+        required: true
+    },
     title: {
         type: String,
         required: true,

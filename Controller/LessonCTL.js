@@ -11,6 +11,7 @@ const LessonCTL = {
             await increase(chapterID);
             res.status(200).json({ message: "Thêm thành công" });
         } catch (error) {
+            console.log(error);
             res.status(500).json({ message: "Có lỗi" });
         }
     },

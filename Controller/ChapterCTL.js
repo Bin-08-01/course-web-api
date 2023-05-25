@@ -11,9 +11,19 @@ const ChapterCTL = {
         }
     },
 
+    getChapterByCourseId: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const chapters = await Chapter.find({ courseID: id });
+            res.status(200).json({ data: chapters });
+        } catch (error) {
+            res.status(500).json({ message: "Có lỗi" });
+        }
+    },
     addChapter: async (req, res) => {
         try {
             const { name, courseID, quanLesson } = req.body;
+            console.log(req.body);
             await Chapter({
                 name: name, courseID, quanLesson
             }).save();

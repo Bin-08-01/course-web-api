@@ -34,6 +34,7 @@ const BannerCTL = {
             }).save();
             return res.status(200).json({ message: "Đã thêm banner" });
         } catch (error) {
+            console.log(error);
             return res.status(500).json({ message: "Có lỗi" });
         }
     },
