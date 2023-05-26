@@ -27,6 +27,10 @@ const UserSchema = Schema({
     admin: {
         type: Boolean,
         default: false
+    },
+    avatar: {
+        type: String,
+        default: "uploads/course/avatar-default.jpg"
     }
 }, { timestamps: true });
 

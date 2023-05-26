@@ -6,6 +6,7 @@ const express = require("express"),
     authRoute = require("./routes/authRoute.js"),
     bannerRoute = require("./routes/bannerRoute.js"),
     courseRoute = require("./routes/courseRoute.js"),
+    userRoute = require("./routes/userRoute.js"),
     { json, urlencoded } = require("body-parser");
 const path = require("path");
 
@@ -26,6 +27,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/v1/auth", authRoute);
 app.use("/v1/course", bannerRoute);
 app.use("/v1/course", courseRoute);
+app.use("/v1/user", userRoute);
 
 app.listen(process.env.PORT || 8000, () => {
     console.log("Server is running in http://localhost:8000...");

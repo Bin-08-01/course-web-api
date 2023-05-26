@@ -8,7 +8,7 @@ const LessonSchema = Schema({
     chapterID: {
         type: Schema.Types.ObjectID,
         ref: "Chapters",
-        require: true
+        required: true
     },
     urlVideo: {
         type: String,
@@ -16,6 +16,11 @@ const LessonSchema = Schema({
     },
     time: {
         type: String,
+        required: true
+    },
+    courseID: {
+        type: Schema.Types.ObjectId,
+        ref: "Courses",
         required: true
     }
 }, { timestamps: true });

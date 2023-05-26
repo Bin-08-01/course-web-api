@@ -8,7 +8,7 @@ const ChapterSchema = Schema({
     courseID: {
         type: Schema.Types.ObjectID,
         ref: "Courses",
-        require: true
+        required: true
     },
     quanLesson: {
         type: Number,

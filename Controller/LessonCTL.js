@@ -4,14 +4,13 @@ const { increase } = require("./ChapterCTL");
 const LessonCTL = {
     addLesson: async (req, res) => {
         try {
-            const { name, chapterID, urlVideo, time } = req.body;
+            const { courseID, name, chapterID, urlVideo, time } = req.body;
             await Lesson({
-                name, chapterID, urlVideo, time
+                courseID, name, chapterID, urlVideo, time
             }).save();
             await increase(chapterID);
             res.status(200).json({ message: "Thêm thành công" });
         } catch (error) {
-            console.log(error);
             res.status(500).json({ message: "Có lỗi" });
         }
     },

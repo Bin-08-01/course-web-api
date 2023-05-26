@@ -1,7 +1,8 @@
 const route = require("express").Router();
-const multer = require('multer');
 const BannerCTL = require('./../Controller/BannerCTL');
 // const { storage } = './../Middleware/storage.js';
+const multer = require('multer');
+
 const path = require("path");
 
 
