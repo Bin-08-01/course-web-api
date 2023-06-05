@@ -13,7 +13,7 @@ const BannerCTL = {
 
     getAll: async (req, res) => {
         try {
-            const banners = await Banner.findAll();
+            const banners = await Banner.find();
             return res.status(200).json({ data: banners });
         }catch(err){
             res.status(500).json({ message: "Có lỗi" });

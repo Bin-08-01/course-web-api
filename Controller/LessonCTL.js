@@ -2,6 +2,14 @@ const Lesson = require("../Model/Lesson");
 const { increase } = require("./ChapterCTL");
 
 const LessonCTL = {
+    getAll: async (req, res) => {
+        try {
+            const lessons = await Lesson.find().populate('chapterID courseID', '_id title name');
+            res.status(200).json({ data: lessons });
+        } catch (error) {
+            res.status(500).json({ message: "Có lỗi" });
+        }
+    },
     addLesson: async (req, res) => {
         try {
             const { courseID, name, chapterID, urlVideo, time } = req.body;
@@ -15,7 +23,7 @@ const LessonCTL = {
         }
     },
 
-    getAll: async (req, res) => {
+    getAllByChapter: async (req, res) => {
         try {
             const { id } = req.params;
             const lessons = await Lesson.find({ chapterID: id });

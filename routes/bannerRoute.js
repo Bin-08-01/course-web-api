@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 route.get("/banner/public", BannerCTL.getPublic);
+route.get("/banner/all", BannerCTL.getAll);
 route.post("/banner/add", upload.single("image"), BannerCTL.addBanner);
 
 

@@ -6,6 +6,7 @@ const LessonCTL = require("../Controller/LessonCTL");
 const ChapterCTL = require("../Controller/ChapterCTL");
 const SubjectCTL = require("../Controller/SubjectCTL");
 const MyCourseCTL = require("../Controller/MyCourseCTL");
+const Search = require("../Controller/Search");
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "./uploads/course");
@@ -31,14 +32,17 @@ route.post("/storage", upload.single('image'), CourseCTL.add);
 route.get("/:id", CourseCTL.detail);
 
 route.get("/chapter/all/:id", ChapterCTL.getChapter);
+route.get("/chapter/all", ChapterCTL.getAll);
 route.post("/chapter/new", ChapterCTL.addChapter);
 route.get("/chapter/course/:id", ChapterCTL.getChapterByCourseId);
 
-route.get("/lesson/all/:id", LessonCTL.getAll);
+route.get("/lesson/all", LessonCTL.getAll);
+route.get("/lesson/all/:id", LessonCTL.getAllByChapter);
 route.post("/lesson/new", LessonCTL.addLesson);
 route.get("/lesson/detail/:id", LessonCTL.detail);
 
 route.get("/my-course/all/:idUser", MyCourseCTL.getAll);
 route.post("/my-course/add", MyCourseCTL.addCourse);
 
+route.get("/search/:key", Search.searchCourse);
 module.exports = route;
