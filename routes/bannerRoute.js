@@ -21,7 +21,9 @@ const upload = multer({ storage: storage });
 
 route.get("/banner/public", BannerCTL.getPublic);
 route.get("/banner/all", BannerCTL.getAll);
+route.post("/banner/edit", upload.single("image"), BannerCTL.edit);
 route.post("/banner/add", upload.single("image"), BannerCTL.addBanner);
+route.get("/banner/detail/:id", BannerCTL.detail);
 
 
 module.exports = route;

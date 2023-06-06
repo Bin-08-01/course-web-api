@@ -25,6 +25,7 @@ route.get("/subject/course/:id", CourseCTL.getBySubjectID);
 route.get("/subject/all", SubjectCTL.getAll);
 route.post("/subject/add", SubjectCTL.add);
 route.get("/subject/detail/:id", SubjectCTL.detail);
+route.post("/subject/edit", SubjectCTL.edit);
 
 route.get("/all", CourseCTL.getAll);
 route.get("/public/:id", CourseCTL.getPublic);

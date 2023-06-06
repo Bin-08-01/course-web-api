@@ -41,9 +41,9 @@ const BannerCTL = {
 
     detail: async (req, res) => {
         try {
-            const banner = await Banner.findOneById(req.body.id);
+            const banner = await Banner.find({ _id: req.params.id });
             if (banner) {
-                return res.status(200).json({ data: banner });
+                return res.status(200).json({ data: banner[0] });
             }
             return res.status(403).json({ message: "Banner không tồn tại" });
         } catch (error) {
@@ -53,15 +53,24 @@ const BannerCTL = {
 
     edit: async (req, res) => {
         try {
-            const { id, name, status, urlImg, extenalLink } = req.body; 
-            if (!name || !urlImg) {
+            const { id, name, status, linkImg, extenalLink } = req.body; 
+            if (!name) {
                 return res.status(401).json({ message: "Tên và ảnh không được để trống" });
             }
             const banner = await Banner.findOne({ _id: id });
             if (!banner) {
                 return res.status(401).json({ message: "Banner này không tồn tại" });
             }
-            banner = { name, status, urlImg, extenalLink }
+            banner.name = name;
+            banner.status = status;
+            banner.extenalLink = extenalLink;
+            if (banner?.urlImg != linkImg) {
+                const imageUrl = req.file.path;
+                const urlImg = imageUrl.replace(/\\/g, '/');
+                banner.urlImg = urlImg;
+            } else {
+                banner.urlImg = linkImg;
+            }
             await banner.save();
             return res.status(200).json({ message: "Thay đổi banner thành công" });
         } catch (error) {

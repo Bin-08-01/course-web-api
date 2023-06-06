@@ -26,13 +26,24 @@ const SubjectCTL = {
     detail: async (req, res) => {
         try {
             const { id } = req.params;
-            const subject = await Subject.find({ _id: id });
+            const subject = await Subject.findOne({ _id: id });
             res.status(200).json({ data: subject });
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
         }
     },
 
+    edit: async (req, res) => {
+        try {
+            const { id, name } = req.body;
+            const subject = await Subject.findOne({ _id: id });
+            subject.name = name;
+            await subject.save();
+            res.status(200).json({ message: "Success" });
+        } catch (error) {
+            res.status(500).json({ message: "Có lỗi" });
+        }
+    },
     increaseQuan: async (id) => {
         try {
             const subject = await Subject.find({ _id: id });
