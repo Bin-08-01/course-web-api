@@ -41,7 +41,7 @@ const SubjectCTL = {
             await subject.save();
             res.status(200).json({ message: "Success" });
         } catch (error) {
-            res.status(500).json({ message: "Có lỗi" });
+            res.status(500).json({ message: "Error" });
         }
     },
     increaseQuan: async (id) => {
@@ -50,7 +50,16 @@ const SubjectCTL = {
             subject.quanCourse++;
             await subject.save();
         } catch (error) {
-            
+            res.status(500).json({ message: "Error" });
+        }
+    },
+
+    delete: async (req,res) => {
+        try {
+            await Subject.findByIdAndDelete(req.params.id);
+            res.status(200).json({ message: "Success" });
+        } catch (error) {
+            res.status(500).json({ message: "Error" });
         }
     }
 }

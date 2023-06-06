@@ -19,6 +19,33 @@ const ChapterCTL = {
         }
     },
 
+    detail: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const chapter = await Chapter.findOne({ _id: id }).populate('courseID', 'title _id');
+            return res.status(200).json({ data: chapter });
+        } catch (error) {
+            res.status(500).json({ message: "Error" });
+        }
+    },
+
+    edit: async (req, res) => {
+        try {
+            const { id, name, courseID, quanLesson } = req.body;
+            console.log(req.body);
+            const chapter = await Chapter.findOne({ _id: id });
+            chapter.name = name;
+            chapter.courseID = courseID;
+            chapter.quanLesson = quanLesson;
+            await chapter.save();
+            res.status(200).json({ message: "Success" });
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Error" });
+        }
+     },
+
     getChapterByCourseId: async (req, res) => {
         try {
             const { id } = req.params;
@@ -53,6 +80,15 @@ const ChapterCTL = {
             await chapter.save();
         } catch (error) {
             console.log(error);
+        }
+    },
+
+    delete: async (req, res) => {
+        try {
+            await Chapter.findByIdAndDelete(req.params.id);
+            res.status(200).json({ message: "Success" });
+        } catch (error) {
+            res.status(500).json({ message: "Error" });
         }
     }
 }

@@ -82,9 +82,9 @@ const BannerCTL = {
         try {
             const { id } = req.body;
             await Banner.findByIdAndDelete(id);
-            res.status(200).json({ message: "Đã xoá banner thành công" });
+            res.status(200).json({ message: "Success" });
         } catch (error) {
-            res.status(500).json({ message: "Có lỗi đã xảy ra" });
+            res.status(500).json({ message: "Error" });
         }
     }
 }

@@ -24,6 +24,6 @@ route.get("/banner/all", BannerCTL.getAll);
 route.post("/banner/edit", upload.single("image"), BannerCTL.edit);
 route.post("/banner/add", upload.single("image"), BannerCTL.addBanner);
 route.get("/banner/detail/:id", BannerCTL.detail);
-
+route.delete("/banner/delete/:id", BannerCTL.delete);
 
 module.exports = route;

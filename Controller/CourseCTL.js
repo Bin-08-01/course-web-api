@@ -58,6 +58,29 @@ const CourseCTL = {
         }
     },
 
+    edit: async (req, res) => {
+        try {
+            const { id, subjectID, title, desc, price, lecture, status, linkImg } = req.body;
+            const course = await Course.findOne({ _id: id });
+            course.subjectID = subjectID;
+            course.title = title;
+            course.desc = desc;
+            course.price = price;
+            course.lecture = lecture;
+            course.status = status;
+            if (linkImg == course.img) {
+                await course.save();
+            } else {
+                const imageUrl = req.file.path;
+                const urlImg = imageUrl.replace(/\\/g, '/');
+                course.img = urlImg;
+            }
+            res.status(200).json({message: "Success"})
+        } catch (error) {
+            res.status(500).json({ message: "Error" })
+        }
+    },
+
     increaseStudent: async (req, res) => {
         try {
             const { id } = req.params;
@@ -68,6 +91,15 @@ const CourseCTL = {
 
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
+        }
+    },
+
+    delete: async (req, res) => {
+        try {
+            await Course.findByIdAndDelete(req.params.id);
+            res.status(200).json({ message: "Success" });
+        } catch (error) {
+            res.status(500).json({ message: "Error" });
         }
     }
 }
